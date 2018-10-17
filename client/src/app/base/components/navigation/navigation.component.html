@@ -1,0 +1,19 @@
+<div class="tt__navigation">
+  <button class="tt__hamburger" (click)="toggle()" [class.close]="isOpen">
+    <span class="line"></span>
+    <span class="line"></span>
+    <span class="line"></span>
+  </button>
+  <nav id="navigation" [class.active]="isOpen">
+    <ul>
+      <li routerLinkActive="active">
+        <i class="material-icons">home</i>
+        <a routerLink="/" (click)="close()">Home</a>
+      </li>
+      <li routerLinkActive="active">
+        <i class="material-icons">list</i>
+        <a routerLink="/todo" (click)="close()">Lists</a>
+      </li>
+    </ul>
+  </nav>
+</div>

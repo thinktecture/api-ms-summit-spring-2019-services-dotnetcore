@@ -1,0 +1,10 @@
+<div class="tt__card">
+  <header>
+    <div class="tt__spinner" [class.active]="isSpinnerActive" *ngIf="showSpinner"></div>
+    <h1>{{ title }}</h1>
+    <ng-content select="button, .button"></ng-content>
+  </header>
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
+</div>

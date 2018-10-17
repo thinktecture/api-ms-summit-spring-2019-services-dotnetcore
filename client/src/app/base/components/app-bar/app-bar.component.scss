@@ -1,0 +1,16 @@
+@import '../../../../ui-kit/global/colors';
+
+.icons {
+  position: absolute;
+  height: 3rem;
+  right: 5rem;
+  top: 1.5rem;
+
+  i {
+    font-size: 30px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: $brand-color;
+    cursor: pointer;
+  }
+}

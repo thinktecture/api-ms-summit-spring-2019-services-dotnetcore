@@ -1,0 +1,19 @@
+<form [formGroup]="formGroup" (ngSubmit)="submit()">
+  <app-card title="Login">
+    <button type="submit" [disabled]="formGroup.invalid">Login</button>
+
+    <p>Please log in to use the application. For demo purposes, please use <em>Alice/alice</em> or <em>Bob/bob</em>.</p>
+    <div class="tt__form">
+      <div class="tt__input tt__input--text full">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" formControlName="username" autocomplete="username">
+      </div>
+      <div class="tt__input tt__input--text full">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" formControlName="password" autocomplete="current-password">
+      </div>
+    </div>
+
+    <p *ngIf="showError">Login failed. Please try again, try again!</p>
+  </app-card>
+</form>

@@ -1,0 +1,13 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+  - bash docker-build-all.sh
+
+deploy:
+  provider: script
+  script: bash docker-push-all.sh
+  on:
+    branch: master

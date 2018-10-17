@@ -1,0 +1,24 @@
+<form [formGroup]="formGroup" (ngSubmit)="submit()">
+  <app-card title="Todo Lists" [showSpinner]="true" [isSpinnerActive]="showSpinner" (outsideClick)="onBlur()">
+    <button type="submit" style="position: absolute; opacity: 0;">Submit</button>
+    <button type="button" class="button" (click)="create()">New</button>
+
+    <p>In this view you can manage your todo lists.</p>
+    <ul class="tt__list table-view" formArrayName="lists" [class.edit-mode]="activeIndex > 0">
+      <li *ngFor="let list of lists.controls; let i=index" [formGroupName]="i" [class.edit]="activeIndex === i">
+        <div *ngIf="list.value.id">{{ list.value.id }}:</div>
+        <div class="tt__input tt__input--text">
+          <input type="text" #text formControlName="name" [name]="'input_' + i" (focus)="onFocus(i)">
+        </div>
+        <div class="actions" *ngIf="list.value.id">
+          <button type="button" class="icon" [routerLink]="['../', list.value.id]">
+            <i class="material-icons">reorder</i>
+          </button>
+          <button type="button" class="icon" (click)="deleteItem(list.value.id)">
+            <i class="material-icons">delete</i>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </app-card>
+</form>
