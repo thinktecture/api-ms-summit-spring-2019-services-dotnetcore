@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.Annotations;
 using TodoApi.Models;
 using TodoApi.Services;
 
@@ -29,7 +26,7 @@ namespace TodoApi.Controllers
 		/// <returns>Todo lists with their Ids and names</returns>
 		[HttpGet]
 		[SwaggerResponse((int)HttpStatusCode.Unauthorized, Description = "User not authorized")]
-		[SwaggerResponse(200, typeof(Dictionary<int, string>))]
+		[SwaggerResponse(200, Type = typeof(Dictionary<int, string>))]
 		public IActionResult Get()
 		{
 			return Ok(_todoService.GetAllLists());
@@ -41,7 +38,7 @@ namespace TodoApi.Controllers
 		/// <param name="listId">Id of the list to fetch the name from</param>
 		/// <returns>The name of the list</returns>
 		[HttpGet("{listId}")]
-		[SwaggerResponse(200, typeof(ValueViewModel))]
+		[SwaggerResponse(200, Type = typeof(ValueViewModel))]
 		[SwaggerResponse((int)HttpStatusCode.Unauthorized, Description = "User not authorized")]
 		public IActionResult Get(int listId)
 		{
