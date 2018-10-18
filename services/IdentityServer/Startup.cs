@@ -55,7 +55,7 @@ namespace IdentityServer
                     "pushapi",
                 },
             };
-            
+
             yield return new Client()
             {
                 ClientId = "todoclient",
@@ -78,7 +78,7 @@ namespace IdentityServer
                 Name = "api1",
                 Scopes = new List<Scope>()
                 {
-                    new Scope() { Name = "api1" },
+                    new Scope() {Name = "api1"},
                 }
             };
 
@@ -87,7 +87,7 @@ namespace IdentityServer
                 Name = "pushapi",
                 Scopes = new List<Scope>()
                 {
-                    new Scope() { Name = "pushapi" },
+                    new Scope() {Name = "pushapi"},
                 }
             };
         }
