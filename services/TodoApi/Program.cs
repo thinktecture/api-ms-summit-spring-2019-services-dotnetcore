@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using Serilog.Sinks.SystemConsole.Themes;
 
 namespace TodoApi
 {
@@ -24,7 +25,7 @@ namespace TodoApi
                     .Enrich.WithMachineName()
                     .Enrich.WithProperty("Application", "TodoApi")
                     .ReadFrom.Configuration(config)
-                    .WriteTo.Console()
+                    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
                     .WriteTo.Seq("http://localhost:5341");
 
                 Log.Logger = loggerConfig.CreateLogger();
