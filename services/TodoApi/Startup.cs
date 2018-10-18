@@ -10,9 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using TodoApi.Models;
 using TodoApi.Services;
+using TodoApi.Settings;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace TodoApi
@@ -28,6 +30,9 @@ namespace TodoApi
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<IdentityServerSettings>(Configuration.GetSection("IdentityServer"));
+            services.Configure<PushServerSettings>(Configuration.GetSection("PushServer"));
+            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -81,8 +86,10 @@ namespace TodoApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IOptions<IdentityServerSettings> settingsAccessor)
         {
+            var settings = settingsAccessor.Value;
+            
             using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 // In Production, use something more resilient
@@ -108,8 +115,8 @@ namespace TodoApi
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", ".NET Summit Todo API v1");
-                c.OAuthClientId(Configuration.GetSection("IdentityServer").GetValue<string>("SwaggerClientId"));
-                c.OAuthClientSecret(Configuration.GetSection("IdentityServer").GetValue<string>("SwaggerClientSecret"));
+                c.OAuthClientId(settings.SwaggerClientId);
+                c.OAuthClientSecret(settings.SwaggerClientSecret);
                 c.OAuthUseBasicAuthenticationWithAccessCodeGrant();
             });
         }

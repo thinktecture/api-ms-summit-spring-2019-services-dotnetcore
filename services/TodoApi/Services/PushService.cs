@@ -4,28 +4,33 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Serilog;
+using TodoApi.Settings;
 
 namespace TodoApi.Services
 {
     public class PushService : BackgroundService
     {
         private readonly ILogger<PushService> _logger;
-        private readonly IConfiguration _config;
-        private readonly ILoggerFactory _loggerFactory;
+        private readonly PushServerSettings _config;
+        private readonly IdentityServerSettings _identityServerSettings;
 
         private CancellationToken _token;
         private HubConnection _connection;
 
-        public PushService(ILogger<PushService> logger, IConfiguration config, ILoggerFactory loggerFactory)
+        public PushService(
+            ILogger<PushService> logger,
+            IOptions<PushServerSettings> settingsAccessor,
+            IOptions<IdentityServerSettings> identityServerSettings
+        )
         {
             _logger = logger;
-            _config = config;
-            _loggerFactory = loggerFactory;
+            _config = settingsAccessor.Value;
+            _identityServerSettings = identityServerSettings.Value;
         }
 
         public async Task SendListCreated(int listId, string listName)
@@ -130,7 +135,7 @@ namespace TodoApi.Services
 
             var connection = new HubConnectionBuilder()
                 .ConfigureLogging(lb => lb.AddSerilog())
-                .WithUrl($"{_config.GetSection("PushServer").GetValue<string>("Url")}/hubs/list?token=" + token)
+                .WithUrl($"{_config.Url}/hubs/list?token=" + token)
                 .Build();
 
             connection.Closed += async (e) => { _connection = null; };
@@ -149,11 +154,11 @@ namespace TodoApi.Services
             {
                 new KeyValuePair<string, string>("grant_type", "client_credentials"),
                 new KeyValuePair<string, string>("scopes", "pushapi"),
-                new KeyValuePair<string, string>("client_id", _config.GetSection("IdentityServer").GetValue<string>("PushClientId")),
-                new KeyValuePair<string, string>("client_secret", _config.GetSection("IdentityServer").GetValue<string>("PushClientSecret")),
+                new KeyValuePair<string, string>("client_id", _identityServerSettings.PushClientId),
+                new KeyValuePair<string, string>("client_secret", _identityServerSettings.PushClientSecret),
             });
 
-            var response = await client.PostAsync($"{_config.GetSection("IdentityServer").GetValue<string>("Url")}/connect/token", content, token);
+            var response = await client.PostAsync($"{_identityServerSettings.Url}/connect/token", content, token);
             if (response.IsSuccessStatusCode)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
