@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { forkJoin } from 'rxjs/observable/forkJoin';
+import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TodoItem } from '../models/todo-item';
 import { TodoList } from '../models/todo-list';
@@ -14,7 +13,7 @@ export class ItemsService {
 
   list(listId: number): Observable<TodoList> {
     return forkJoin(
-      this.http.get<{value: string}>(`${this.configuration.apiUrl}/list/${listId}`),
+      this.http.get<{ value: string }>(`${this.configuration.apiUrl}/list/${listId}`),
       this.http.get<TodoItem[]>(`${this.configuration.apiUrl}/list/${listId}/item`),
     ).pipe(
       map(([todoListName, todoItems]) => ({ id: listId, name: todoListName.value, items: todoItems } as TodoList)),
@@ -22,7 +21,7 @@ export class ItemsService {
   }
 
   createItem(listId: number, name: string): Observable<number> {
-    return this.http.post<{id: number}>(`${this.configuration.apiUrl}/list/${listId}/item`, { value: name }).pipe(
+    return this.http.post<{ id: number }>(`${this.configuration.apiUrl}/list/${listId}/item`, { value: name }).pipe(
       map(result => result.id),
     );
   }

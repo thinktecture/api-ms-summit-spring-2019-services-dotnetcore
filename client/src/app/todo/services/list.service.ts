@@ -17,7 +17,7 @@ export class ListService {
   }
 
   createList(name: string): Observable<number> {
-    return this.http.post<{id: number}>(`${this.configuration.apiUrl}/list`, { value: name }).pipe(
+    return this.http.post<{ id: number }>(`${this.configuration.apiUrl}/list`, { value: name }).pipe(
       map(result => result.id),
     );
   }

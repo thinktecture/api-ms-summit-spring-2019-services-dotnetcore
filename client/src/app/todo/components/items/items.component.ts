@@ -1,8 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, NgZone, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
-import { forkJoin } from 'rxjs/observable/forkJoin';
+import { forkJoin, Observable, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { ItemAdded, ItemDeleted, ItemDoneChanged, ItemNameChanged } from '../../../realtime/models/realtime-models';
 import { RealtimeService } from '../../../realtime/services/realtime.service';
@@ -158,11 +157,11 @@ export class ItemsComponent implements OnInit, OnDestroy {
     }
 
     this.listName = list.name;
-    list.items.forEach(list => this.items.push(this.createFormEntry(list)));
+    list.items.forEach(l => this.items.push(this.createFormEntry(l)));
 
-    this.oldItemsMap = (this.formGroup.value.items as TodoItem[]).reduce((map, current) => {
-      map[current.id] = current.text;
-      return map;
+    this.oldItemsMap = (this.formGroup.value.items as TodoItem[]).reduce((m, current) => {
+      m[current.id] = current.text;
+      return m;
     }, {});
 
     this.showSpinner = false;

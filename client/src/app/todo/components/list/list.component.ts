@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, NgZone, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
-import { forkJoin } from 'rxjs/observable/forkJoin';
+import { forkJoin, Observable, Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { ListAdded, ListDeleted, ListRenamed } from '../../../realtime/models/realtime-models';
 import { RealtimeService } from '../../../realtime/services/realtime.service';

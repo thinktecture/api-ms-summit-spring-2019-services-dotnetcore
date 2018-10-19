@@ -1,6 +1,6 @@
 import { LoginModuleConfiguration } from '../app/login/models/login-module-configuration';
-import { RealtimeModuleConfiguration } from '../app/realtime/models/realtime-module-configuration';
 import { TodoModuleConfiguration } from '../app/todo/models/todo-module-configuration';
+import { RealtimeModuleConfiguration } from '../app/realtime/models/realtime-module-configuration';
 
 export const environment = {
   production: false,

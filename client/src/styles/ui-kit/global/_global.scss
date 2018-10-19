@@ -28,6 +28,7 @@ a {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  overflow: hidden;
   padding-top: 6.3rem;
   padding-bottom: 5rem;
   transition: .2s filter ease-in-out;

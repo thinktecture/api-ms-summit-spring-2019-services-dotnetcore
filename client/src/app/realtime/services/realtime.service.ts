@@ -39,7 +39,9 @@ export class RealtimeService {
       await this.disconnect();
     }
 
-    this.connection = new signalR.HubConnection(`${this.moduleConfiguration.hubUrl}/hubs/list?token=${this.tokenStore.accessToken}`);
+    this.connection = new signalR.HubConnectionBuilder()
+      .withUrl(`${this.moduleConfiguration.hubUrl}/hubs/list?token=${this.tokenStore.accessToken}`)
+      .build();
     this.assignEvents();
 
     return this.connection.start();
