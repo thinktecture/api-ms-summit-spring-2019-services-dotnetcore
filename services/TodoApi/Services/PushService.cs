@@ -98,7 +98,7 @@ namespace TodoApi.Services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _token = stoppingToken;
+            await Task.Run( () => { _token = stoppingToken; }, stoppingToken);
         }
 
         public override async Task StartAsync(CancellationToken cancellationToken)
@@ -125,10 +125,10 @@ namespace TodoApi.Services
             return (_connection != null);
         }
 
-        private async Task Connect(CancellationToken cancellationtoken)
+        private async Task Connect(CancellationToken cancellationToken)
         {
             _logger?.LogDebug($"{nameof(Connect)}");
-            var token = await GetToken(cancellationtoken);
+            var token = await GetToken(cancellationToken);
 
             if (String.IsNullOrWhiteSpace(token))
                 return;
@@ -138,11 +138,19 @@ namespace TodoApi.Services
                 .WithUrl($"{_config.Url}/hubs/list?token=" + token)
                 .Build();
 
-            connection.Closed += async (e) => { _connection = null; };
+            connection.On<int, int>("itemDeleted", (listId, itemId) => { });
+            connection.On<int, int, bool>("itemDoneChanged", (listId, itemId, done) => { });
+            connection.On<int, int, string>("itemNameChanged", (listId, itemId, newName) => { });
+            connection.On<int, int, string>("itemAdded", (listId, itemId, name) => { });
+            connection.On<int>("listDeleted", (listId) => { });
+            connection.On<int, string>("listRenamed", (listId, newName) => { });
+            connection.On<int, string>("listAdded", (listId, name) => { });
+
+            connection.Closed += (e) => { _connection = null; return Task.CompletedTask; };
 
             _logger?.LogDebug($"{nameof(Connect)}: Trying to connect with token {{Token}}", token);
 
-            await connection.StartAsync(cancellationtoken).ConfigureAwait(false);
+            await connection.StartAsync(cancellationToken).ConfigureAwait(false);
             _connection = connection;
         }
 
