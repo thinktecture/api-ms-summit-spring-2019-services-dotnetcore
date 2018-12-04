@@ -33,64 +33,64 @@ namespace TodoApi.Services
             _identityServerSettings = identityServerSettings.Value;
         }
 
-        public async Task SendListCreated(int listId, string listName)
+        public async Task SendListCreatedAsync(int listId, string listName)
         {
-            _logger?.LogDebug($"{nameof(SendListCreated)}: {{ListId}}, {{ListName}}", listId, listName);
-            if (await EnsureConnected(_token))
+            _logger?.LogDebug($"{nameof(SendListCreatedAsync)}: {{ListId}}, {{ListName}}", listId, listName);
+            if (await EnsureConnectedAsync(_token))
             {
                 await _connection.SendAsync("ListAdded", listId, listName, _token);
             }
         }
 
-        public async Task SendListRenamed(int listId, string newName)
+        public async Task SendListRenamedAsync(int listId, string newName)
         {
-            _logger?.LogDebug($"{nameof(SendListRenamed)}: {{ListId}}, {{ListName}}", listId, newName);
-            if (await EnsureConnected(_token))
+            _logger?.LogDebug($"{nameof(SendListRenamedAsync)}: {{ListId}}, {{ListName}}", listId, newName);
+            if (await EnsureConnectedAsync(_token))
             {
                 await _connection.SendAsync("ListRenamed", listId, newName, _token);
             }
         }
 
-        public async Task SendListDeleted(int listId)
+        public async Task SendListDeletedAsync(int listId)
         {
-            _logger?.LogDebug($"{nameof(SendListDeleted)}: {{ListId}}", listId);
-            if (await EnsureConnected(_token))
+            _logger?.LogDebug($"{nameof(SendListDeletedAsync)}: {{ListId}}", listId);
+            if (await EnsureConnectedAsync(_token))
             {
                 await _connection.SendAsync("ListDeleted", listId, _token);
             }
         }
 
-        public async Task SendItemAdded(int listId, int itemId, string itemName)
+        public async Task SendItemAddedAsync(int listId, int itemId, string itemName)
         {
-            _logger?.LogDebug($"{nameof(SendItemAdded)}: {{ListId}}, {{ItemId}}, {{ItemName}}", listId, itemId, itemName);
-            if (await EnsureConnected(_token))
+            _logger?.LogDebug($"{nameof(SendItemAddedAsync)}: {{ListId}}, {{ItemId}}, {{ItemName}}", listId, itemId, itemName);
+            if (await EnsureConnectedAsync(_token))
             {
                 await _connection.SendAsync("ItemAdded", listId, itemId, itemName, _token);
             }
         }
 
-        public async Task SendItemNameChanged(int listId, int itemId, string newName)
+        public async Task SendItemNameChangedAsync(int listId, int itemId, string newName)
         {
-            _logger?.LogDebug($"{nameof(SendItemNameChanged)}: {{ListId}}, {{ItemId}}, {{ItemName}}", listId, itemId, newName);
-            if (await EnsureConnected(_token))
+            _logger?.LogDebug($"{nameof(SendItemNameChangedAsync)}: {{ListId}}, {{ItemId}}, {{ItemName}}", listId, itemId, newName);
+            if (await EnsureConnectedAsync(_token))
             {
                 await _connection.SendAsync("ItemNameChanged", listId, itemId, newName, _token);
             }
         }
 
-        public async Task SendItemDoneChanged(int listId, int itemId, bool done)
+        public async Task SendItemDoneChangedAsync(int listId, int itemId, bool done)
         {
-            _logger?.LogDebug($"{nameof(SendItemDoneChanged)}: {{ListId}}, {{ItemId}}, {{Done}}", listId, itemId, done);
-            if (await EnsureConnected(_token))
+            _logger?.LogDebug($"{nameof(SendItemDoneChangedAsync)}: {{ListId}}, {{ItemId}}, {{Done}}", listId, itemId, done);
+            if (await EnsureConnectedAsync(_token))
             {
                 await _connection.SendAsync("ItemDoneChanged", listId, itemId, done, _token);
             }
         }
 
-        public async Task SendItemDeleted(int listId, int itemId)
+        public async Task SendItemDeletedAsync(int listId, int itemId)
         {
-            _logger?.LogDebug($"{nameof(SendItemDeleted)}: {{ListId}}, {{ItemId}}", listId, itemId);
-            if (await EnsureConnected(_token))
+            _logger?.LogDebug($"{nameof(SendItemDeletedAsync)}: {{ListId}}, {{ItemId}}", listId, itemId);
+            if (await EnsureConnectedAsync(_token))
             {
                 await _connection.SendAsync("ItemDeleted", listId, itemId, _token);
             }
@@ -98,37 +98,39 @@ namespace TodoApi.Services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await Task.Run( () => { _token = stoppingToken; }, stoppingToken);
+            await Task.Run(() => { _token = stoppingToken; }, stoppingToken);
         }
 
         public override async Task StartAsync(CancellationToken cancellationToken)
         {
             await base.StartAsync(cancellationToken);
-            await Connect(cancellationToken);
+            await ConnectAsync(cancellationToken);
         }
 
         public override async Task StopAsync(CancellationToken cancellationToken)
         {
-            await _connection?.StopAsync();
-
-            _connection = null;
+            if (_connection != null)
+            {
+                await _connection.StopAsync(cancellationToken);
+                _connection = null;
+            }
 
             await base.StopAsync(cancellationToken);
         }
 
-        private async Task<bool> EnsureConnected(CancellationToken token)
+        private async Task<bool> EnsureConnectedAsync(CancellationToken token)
         {
             if (_connection != null)
                 return true;
 
-            await Connect(token);
+            await ConnectAsync(token);
             return (_connection != null);
         }
 
-        private async Task Connect(CancellationToken cancellationToken)
+        private async Task ConnectAsync(CancellationToken cancellationToken)
         {
-            _logger?.LogDebug($"{nameof(Connect)}");
-            var token = await GetToken(cancellationToken);
+            _logger?.LogDebug($"{nameof(ConnectAsync)}");
+            var token = await GetTokenAsync(cancellationToken);
 
             if (String.IsNullOrWhiteSpace(token))
                 return;
@@ -149,13 +151,13 @@ namespace TodoApi.Services
 
             connection.Closed += (e) => { _connection = null; return Task.CompletedTask; };
 
-            _logger?.LogDebug($"{nameof(Connect)}: Trying to connect with token {{Token}}", token);
+            _logger?.LogDebug($"{nameof(ConnectAsync)}: Trying to connect with token {{Token}}", token);
 
             await connection.StartAsync(cancellationToken).ConfigureAwait(false);
             _connection = connection;
         }
 
-        private async Task<string> GetToken(CancellationToken token)
+        private async Task<string> GetTokenAsync(CancellationToken token)
         {
             var client = new HttpClient();
 

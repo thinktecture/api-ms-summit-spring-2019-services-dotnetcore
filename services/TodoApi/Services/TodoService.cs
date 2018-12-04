@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TodoApi.Models;
-
-#pragma warning disable 4014
 
 namespace TodoApi.Services
 {
@@ -72,7 +71,7 @@ namespace TodoApi.Services
             _todoContext.Add(entity);
             _todoContext.SaveChanges();
 
-            _pushService.SendListCreated(entity.Id, entity.Name);
+            StartInBackground(_pushService.SendListCreatedAsync(entity.Id, entity.Name));
 
             return entity.Id;
         }
@@ -95,7 +94,7 @@ namespace TodoApi.Services
             _todoContext.Add(entity);
             _todoContext.SaveChanges();
 
-            _pushService.SendItemAdded(listId, entity.Id, entity.Text);
+            StartInBackground(_pushService.SendItemAddedAsync(listId, entity.Id, entity.Text));
 
             return entity.Id;
         }
@@ -112,7 +111,7 @@ namespace TodoApi.Services
 
             _todoContext.SaveChanges();
 
-            _pushService.SendListRenamed(listId, newName);
+            StartInBackground(_pushService.SendListRenamedAsync(listId, newName));
         }
 
         public void ChangeItemText(int listId, int itemId, string newText)
@@ -127,7 +126,7 @@ namespace TodoApi.Services
 
             _todoContext.SaveChanges();
 
-            _pushService.SendItemNameChanged(listId, itemId, newText);
+            StartInBackground(_pushService.SendItemNameChangedAsync(listId, itemId, newText));
         }
 
         public void ToggleItemDone(int listId, int itemId)
@@ -139,7 +138,7 @@ namespace TodoApi.Services
             _logger?.LogInformation("Toggling list item {Item} with id {ItemId}, new state: {Done}", entity.Text, entity.Id, entity.Done);
 
             _todoContext.SaveChanges();
-            _pushService.SendItemDoneChanged(listId, itemId, entity.Done);
+            StartInBackground(_pushService.SendItemDoneChangedAsync(listId, itemId, entity.Done));
         }
 
         public bool DeleteList(int listId)
@@ -154,7 +153,7 @@ namespace TodoApi.Services
             try
             {
                 _todoContext.SaveChanges();
-                _pushService.SendListDeleted(listId);
+                StartInBackground(_pushService.SendListDeletedAsync(listId));
                 return true;
             }
             catch (DbUpdateConcurrencyException)
@@ -175,7 +174,7 @@ namespace TodoApi.Services
             try
             {
                 _todoContext.SaveChanges();
-                _pushService.SendItemDeleted(listId, itemId);
+                StartInBackground(_pushService.SendItemDeletedAsync(listId, itemId));
                 return true;
             }
             catch (DbUpdateConcurrencyException)
@@ -184,10 +183,14 @@ namespace TodoApi.Services
             }
         }
 
-
         public string GetListName(int listId)
         {
             return _todoContext.Lists.Find(listId)?.Name;
+        }
+
+        private void StartInBackground(Task task)
+        {
+            task.ContinueWith((t) => { _logger.LogError(t.Exception, "An error occured while executing a background task.");}, TaskContinuationOptions.OnlyOnFaulted);
         }
     }
 }
