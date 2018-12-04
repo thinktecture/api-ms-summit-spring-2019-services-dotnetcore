@@ -51,6 +51,7 @@ namespace TodoApi
                 .AddScoped<TodoService>()
                 .AddDbContext<TodoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("sqlserver")))
                 .AddSingleton<PushService>()
+                .AddSingleton<IPushService>(ctx => ctx.GetRequiredService<PushService>())
                 .AddSingleton<IHostedService>(ctx => ctx.GetRequiredService<PushService>());
             ;
 

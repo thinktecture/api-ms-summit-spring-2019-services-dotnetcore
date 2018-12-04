@@ -13,7 +13,7 @@ using TodoApi.Settings;
 
 namespace TodoApi.Services
 {
-    public class PushService : BackgroundService
+    public class PushService : BackgroundService, IPushService
     {
         private readonly ILogger<PushService> _logger;
         private readonly PushServerSettings _config;

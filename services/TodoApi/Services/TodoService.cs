@@ -12,9 +12,9 @@ namespace TodoApi.Services
     {
         private readonly ILogger<TodoService> _logger;
         private readonly TodoContext _todoContext;
-        private readonly PushService _pushService;
+        private readonly IPushService _pushService;
 
-        public TodoService(ILogger<TodoService> logger, TodoContext todoContext, PushService pushService)
+        public TodoService(ILogger<TodoService> logger, TodoContext todoContext, IPushService pushService)
         {
             _logger = logger;
             _todoContext = todoContext ?? throw new ArgumentNullException(nameof(todoContext));
