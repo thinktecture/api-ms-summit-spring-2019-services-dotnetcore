@@ -58,7 +58,7 @@ namespace TodoApi
             {
                 c.SwaggerDoc("v1", new Info()
                 {
-                    Title = "Microservices and API Summit Todo Api",
+                    Title = "TT Todo Api",
                     Version = "v1",
                 });
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "TodoApi.xml"));
@@ -114,7 +114,7 @@ namespace TodoApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Microservices and API Summit Todo API v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TT Todo API v1");
                 c.OAuthClientId(settings.SwaggerClientId);
                 c.OAuthClientSecret(settings.SwaggerClientSecret);
                 c.OAuthUseBasicAuthenticationWithAccessCodeGrant();

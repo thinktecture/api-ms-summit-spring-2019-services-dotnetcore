@@ -138,6 +138,7 @@ namespace TodoApi.Services
                 .WithUrl($"{_config.Url}/hubs/list?token=" + token)
                 .Build();
 
+            // This is only to prevent an error message in the logs, see https://github.com/aspnet/SignalR/issues/2313
             connection.On<int, int>("itemDeleted", (listId, itemId) => { });
             connection.On<int, int, bool>("itemDoneChanged", (listId, itemId, done) => { });
             connection.On<int, int, string>("itemNameChanged", (listId, itemId, newName) => { });
