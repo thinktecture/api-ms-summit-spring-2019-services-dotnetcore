@@ -2,3 +2,4 @@
 
 services/TodoApi/TodoApi\.xml
 /services/seq
+.DS_Store
