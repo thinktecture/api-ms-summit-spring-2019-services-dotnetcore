@@ -5,7 +5,7 @@ export interface ListAdded {
 
 export interface ListRenamed {
   listId: number;
-  newName: string,
+  newName: string;
 }
 
 export interface ListDeleted {
