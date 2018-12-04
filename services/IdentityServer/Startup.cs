@@ -51,7 +51,7 @@ namespace IdentityServer
                 },
                 AllowedScopes = new List<string>()
                 {
-                    "api1",
+                    "todoapi",
                     "pushapi",
                 },
             };
@@ -75,10 +75,10 @@ namespace IdentityServer
         {
             yield return new ApiResource()
             {
-                Name = "api1",
+                Name = "todoapi",
                 Scopes = new List<Scope>()
                 {
-                    new Scope() {Name = "api1"},
+                    new Scope() { Name = "todoapi" },
                 }
             };
 
@@ -87,7 +87,7 @@ namespace IdentityServer
                 Name = "pushapi",
                 Scopes = new List<Scope>()
                 {
-                    new Scope() {Name = "pushapi"},
+                    new Scope() { Name = "pushapi" },
                 }
             };
         }

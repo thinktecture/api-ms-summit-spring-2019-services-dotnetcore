@@ -37,7 +37,7 @@ namespace TodoApi
                 .AddJwtBearer(options =>
                 {
                     options.Authority = Configuration.GetSection("IdentityServer").GetValue<string>("Url");
-                    options.Audience = "api1";
+                    options.Audience = "todoapi";
                     options.RequireHttpsMetadata = false; // do not do this in production!
                 });
 
@@ -58,7 +58,7 @@ namespace TodoApi
             {
                 c.SwaggerDoc("v1", new Info()
                 {
-                    Title = ".NET Summit Todo Api",
+                    Title = "Microservices and API Summit Todo Api",
                     Version = "v1",
                 });
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "TodoApi.xml"));
@@ -69,13 +69,13 @@ namespace TodoApi
                     TokenUrl = $"{Configuration.GetSection("IdentityServer").GetValue<string>("Url")}/connect/token",
                     Scopes = new Dictionary<string, string>()
                     {
-                        {"api1", "Access the Todo APi"},
+                        { "todoapi", "Access the Todo APi" },
                     },
                 });
                 c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>()
                 {
                     {
-                        "oauth2", new[] {"api1"}
+                        "oauth2", new[] { "todoapi" }
                     },
                 });
             });
@@ -114,7 +114,7 @@ namespace TodoApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", ".NET Summit Todo API v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Microservices and API Summit Todo API v1");
                 c.OAuthClientId(settings.SwaggerClientId);
                 c.OAuthClientSecret(settings.SwaggerClientSecret);
                 c.OAuthUseBasicAuthenticationWithAccessCodeGrant();
