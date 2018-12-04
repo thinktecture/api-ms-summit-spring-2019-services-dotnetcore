@@ -9,4 +9,4 @@ RUN npm run build
 
 # Runtime Image
 FROM nginx:alpine
-COPY --from=build-env /usr/app/dist /usr/share/nginx/html
+COPY --from=build-env /usr/app/dist/web-client /usr/share/nginx/html
