@@ -31,10 +31,19 @@ namespace PushApi
                     {
                         OnMessageReceived = context =>
                         {
-                            if (context.Request.Path.Value.StartsWith("/hubs")
-                                && context.Request.Query.TryGetValue("token", out var token))
+                            if (context.Request.Path.Value.StartsWith("/hubs"))
                             {
-                                context.Token = token;
+                                // Compatibility version with old @aspnet/signalr client side lib
+                                if (context.Request.Query.TryGetValue("token", out var token))
+                                {
+                                    context.Token = token;
+                                }
+                                
+                                // New SignalR client-side library
+                                if (context.Request.Query.TryGetValue("access_token", out var accessToken))
+                                {
+                                    context.Token = accessToken;
+                                }
                             }
 
                             return Task.CompletedTask;
