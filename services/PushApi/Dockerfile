@@ -1,5 +1,5 @@
 # Build Image
-FROM microsoft/dotnet:2.1-sdk-alpine AS build-env
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2-alpine3.9 AS build-env
 WORKDIR /app
 
 COPY *.csproj ./
@@ -9,7 +9,7 @@ COPY . ./
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
-FROM microsoft/dotnet:2.1-aspnetcore-runtime-alpine
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-alpine3.9
 WORKDIR /app
 COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "PushApi.dll"]
