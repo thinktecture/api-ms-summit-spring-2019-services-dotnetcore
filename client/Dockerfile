@@ -1,5 +1,5 @@
 # Build Image
-FROM node:9-alpine AS build-env
+FROM node:10-alpine AS build-env
 
 WORKDIR /usr/app
 COPY . .
