@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TodoApi.Migrations
 {
-    public partial class CreateDb : Migration
+    public partial class Initial_Migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,10 @@ namespace TodoApi.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: false)
                 },
-                constraints: table => { table.PrimaryKey("PK_Lists", x => x.Id); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lists", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Items",
@@ -40,18 +43,18 @@ namespace TodoApi.Migrations
 
             migrationBuilder.InsertData(
                 table: "Lists",
-                columns: new[] {"Id", "Name"},
-                values: new object[] {1, "Initial list"});
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "Initial list" });
 
             migrationBuilder.InsertData(
                 table: "Items",
-                columns: new[] {"Id", "Done", "Text", "TodoListId"},
-                values: new object[] {1, false, "First item", 1});
+                columns: new[] { "Id", "Done", "Text", "TodoListId" },
+                values: new object[] { 1, false, "First item", 1 });
 
             migrationBuilder.InsertData(
                 table: "Items",
-                columns: new[] {"Id", "Done", "Text", "TodoListId"},
-                values: new object[] {2, true, "Second item", 1});
+                columns: new[] { "Id", "Done", "Text", "TodoListId" },
+                values: new object[] { 2, true, "Second item", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Items_TodoListId",

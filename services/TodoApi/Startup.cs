@@ -107,7 +107,12 @@ namespace TodoApi
                 app.UseHttpsRedirection();
             }
 
-            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials()); // Do NOT do this in production
+            app.UseCors(builder => builder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .SetIsOriginAllowed(s => true)
+                .AllowCredentials()
+            ); // Do NOT do this in production
             app.UseAuthentication();
             app.UseMvc();
             app.UseSwagger();

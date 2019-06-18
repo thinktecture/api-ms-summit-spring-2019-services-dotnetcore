@@ -67,7 +67,12 @@ namespace PushApi
                 app.UseHttpsRedirection();
             }
 
-            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
+            app.UseCors(builder => builder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .SetIsOriginAllowed(s => true)
+                .AllowCredentials()
+            ); // Do NOT do this in production
             app.UseAuthentication();
             app.UseSignalR(routes => { routes.MapHub<ListHub>("/hubs/list"); });
         }
