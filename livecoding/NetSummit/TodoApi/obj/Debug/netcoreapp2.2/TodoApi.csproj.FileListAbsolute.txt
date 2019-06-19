@@ -1,0 +1,15 @@
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\TodoApi\bin\Debug\netcoreapp2.2\TodoApi.deps.json
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\TodoApi\bin\Debug\netcoreapp2.2\TodoApi.runtimeconfig.json
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\TodoApi\bin\Debug\netcoreapp2.2\TodoApi.runtimeconfig.dev.json
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\TodoApi\bin\Debug\netcoreapp2.2\TodoApi.dll
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\TodoApi\bin\Debug\netcoreapp2.2\TodoApi.pdb
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\TodoApi\obj\Debug\netcoreapp2.2\TodoApi.csprojAssemblyReference.cache
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\TodoApi\obj\Debug\netcoreapp2.2\TodoApi.csproj.CoreCompileInputs.cache
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\TodoApi\obj\Debug\netcoreapp2.2\TodoApi.RazorAssemblyInfo.cache
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\TodoApi\obj\Debug\netcoreapp2.2\TodoApi.RazorAssemblyInfo.cs
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\TodoApi\obj\Debug\netcoreapp2.2\TodoApi.AssemblyInfoInputs.cache
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\TodoApi\obj\Debug\netcoreapp2.2\TodoApi.AssemblyInfo.cs
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\TodoApi\obj\Debug\netcoreapp2.2\TodoApi.RazorTargetAssemblyInfo.cache
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\TodoApi\obj\Debug\netcoreapp2.2\TodoApi.dll
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\TodoApi\obj\Debug\netcoreapp2.2\TodoApi.pdb
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\TodoApi\bin\Debug\netcoreapp2.2\TodoApi.xml

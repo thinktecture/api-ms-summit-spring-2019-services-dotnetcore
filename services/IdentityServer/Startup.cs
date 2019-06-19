@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using IdentityModel;
 using IdentityServer4.Models;
@@ -54,6 +55,7 @@ namespace IdentityServer
                     "todoapi",
                     "pushapi",
                 },
+                AccessTokenLifetime = (int) TimeSpan.FromDays(1).TotalSeconds,
             };
 
             yield return new Client()

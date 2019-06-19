@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TodoApi</name>
+    </assembly>
+    <members>
+        <member name="T:TodoApi.Controllers.ItemController">
+            <summary>
+            Handles requests related to managing todo items
+            </summary>
+        </member>
+        <member name="M:TodoApi.Controllers.ItemController.Get(System.Int32)">
+            <summary>
+            Gets the items of a specified todo list
+            </summary>
+            <param name="listId">The Id of the list to retrieve the items from</param>
+            <returns>The items of the requested todo list</returns>
+        </member>
+        <member name="M:TodoApi.Controllers.ItemController.Post(System.Int32,TodoApi.Models.ValueViewModel)">
+            <summary>
+            Creates a new todo item
+            </summary>
+            <param name="listId">The id of the list to add this new item to</param>
+            <param name="data">The name of the todo item to add to the specified list</param>
+            <returns>The Id of the new created todo item</returns>
+        </member>
+        <member name="M:TodoApi.Controllers.ItemController.Put(System.Int32,System.Int32,TodoApi.Models.ValueViewModel)">
+            <summary>
+            Changes the name of an existing todo item
+            </summary>
+            <param name="listId">The id of the list this item belongs to</param>
+            <param name="itemId">The id of the item to change</param>
+            <param name="data">The new name of the todo item</param>
+            <returns>Whether changing the name was successful</returns>
+        </member>
+        <member name="M:TodoApi.Controllers.ItemController.Post(System.Int32,System.Int32)">
+            <summary>
+            Toggles the done state of an existing todo item
+            </summary>
+            <param name="listId">The id of the list this item belongs to</param>
+            <param name="itemId">The id of the item to be toggled</param>
+            <returns>Whether toggling was successful</returns>
+        </member>
+        <member name="M:TodoApi.Controllers.ItemController.Delete(System.Int32,System.Int32)">
+            <summary>
+            Deletes an existing item from a list
+            </summary>
+            <param name="listId">The id of the list to delete this item from</param>
+            <param name="itemId">The id of the item to delete</param>
+            <returns></returns>
+        </member>
+        <member name="T:TodoApi.Controllers.ListController">
+            <summary>
+            Handles requests relating to managing todo lists
+            </summary>
+        </member>
+        <member name="M:TodoApi.Controllers.ListController.Get">
+            <summary>
+            Gets all available Todo lists
+            </summary>
+            <returns>Todo lists with their Ids and names</returns>
+        </member>
+        <member name="M:TodoApi.Controllers.ListController.Get(System.Int32)">
+            <summary>
+            Gets the name of a specific list
+            </summary>
+            <param name="listId">Id of the list to fetch the name from</param>
+            <returns>The name of the list</returns>
+        </member>
+        <member name="M:TodoApi.Controllers.ListController.Post(TodoApi.Models.ValueViewModel)">
+            <summary>
+            Adds a new todo list
+            </summary>
+            <param name="data">A DTO that carries the name of the new todo list</param>
+            <returns>The new id of the created todo list</returns>
+        </member>
+        <member name="M:TodoApi.Controllers.ListController.Put(System.Int32,TodoApi.Models.ValueViewModel)">
+            <summary>
+            Updates an existing todo list
+            </summary>
+            <param name="listId">The Id of the list to change the name of</param>
+            <param name="data">A DTO that carries the new name of the existing todo list</param>
+            <returns>Whether changing the name was successful</returns>
+        </member>
+        <member name="M:TodoApi.Controllers.ListController.Delete(System.Int32)">
+            <summary>
+            Deletes an existing todo list
+            </summary>
+            <param name="listId">The Id of the list to delete</param>
+            <returns>Whether deletion was successful</returns>
+        </member>
+        <member name="T:TodoApi.Models.IdViewModel">
+            <summary>
+            Represents an ID
+            </summary>
+        </member>
+        <member name="P:TodoApi.Models.IdViewModel.Id">
+            <summary>
+            Gets or sets the Id
+            </summary>
+        </member>
+        <member name="T:TodoApi.Models.ItemViewModel">
+            <summary>
+            Represents a Todo list item
+            </summary>
+        </member>
+        <member name="P:TodoApi.Models.ItemViewModel.Id">
+            <summary>
+            Gets or sets the id of the item
+            </summary>
+        </member>
+        <member name="P:TodoApi.Models.ItemViewModel.ListId">
+            <summary>
+            Gets or sets the id of the list this item belongs to
+            </summary>
+        </member>
+        <member name="P:TodoApi.Models.ItemViewModel.Text">
+            <summary>
+            Gets or sets the name of this todo item
+            </summary>
+        </member>
+        <member name="P:TodoApi.Models.ItemViewModel.Done">
+            <summary>
+            Gets or sets whether this item is done or not
+            </summary>
+        </member>
+        <member name="T:TodoApi.Models.ValueViewModel">
+            <summary>
+            Represents a string value
+            </summary>
+        </member>
+        <member name="P:TodoApi.Models.ValueViewModel.Value">
+            <summary>
+            Gets or sets the actual value
+            </summary>
+        </member>
+    </members>
+</doc>

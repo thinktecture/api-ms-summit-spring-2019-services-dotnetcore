@@ -1,0 +1,14 @@
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\PushApi\bin\Debug\netcoreapp2.2\PushApi.deps.json
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\PushApi\bin\Debug\netcoreapp2.2\PushApi.runtimeconfig.json
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\PushApi\bin\Debug\netcoreapp2.2\PushApi.runtimeconfig.dev.json
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\PushApi\bin\Debug\netcoreapp2.2\PushApi.dll
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\PushApi\bin\Debug\netcoreapp2.2\PushApi.pdb
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\PushApi\obj\Debug\netcoreapp2.2\PushApi.csprojAssemblyReference.cache
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\PushApi\obj\Debug\netcoreapp2.2\PushApi.csproj.CoreCompileInputs.cache
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\PushApi\obj\Debug\netcoreapp2.2\PushApi.RazorAssemblyInfo.cache
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\PushApi\obj\Debug\netcoreapp2.2\PushApi.RazorAssemblyInfo.cs
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\PushApi\obj\Debug\netcoreapp2.2\PushApi.AssemblyInfoInputs.cache
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\PushApi\obj\Debug\netcoreapp2.2\PushApi.AssemblyInfo.cs
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\PushApi\obj\Debug\netcoreapp2.2\PushApi.RazorTargetAssemblyInfo.cache
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\PushApi\obj\Debug\netcoreapp2.2\PushApi.dll
+C:\Dev\tt\conf\api-ms-summit-spring-2019-services-dotnetcore\livecoding\NetSummit\PushApi\obj\Debug\netcoreapp2.2\PushApi.pdb
